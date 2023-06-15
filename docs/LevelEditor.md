@@ -2,6 +2,10 @@
 
 ## Approach
 
+<img src="tiles.png" width="550">
+
+![Alt](/tilemap.png "TileMap")
+
 The objective of the level editor was to be able to provide the CreateMap() method in the scene the ability to pass a edited tilemap level.
 
 The map would be created from either discrete tiles, or a tileset. The configuration and spacing of that level could be passed through a series of ascii characters representing the tiles.
