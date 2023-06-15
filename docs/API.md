@@ -11,7 +11,7 @@
 - Cutscenes
 - [Events](./Events.md)
 - [Asset Management and Peasy-Assets](./Assets.md)
-- Level Editor
+- [Level Editor](./LevelEditor.md)
 - [Game Objects](./GameObject.md)
 - MultiPlayer
 - Sound API
