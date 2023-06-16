@@ -15,6 +15,6 @@
 - [Game Objects](./GameObject.md)
 - MultiPlayer
 - [Sound API](./sound.md)
-- Story Flags
+- [Story Flags](./Storyflags.md)
 - Custom PlugIns
 - State Management and Peasy-UI

@@ -16,3 +16,4 @@
   - [Assets](./Assets.md)
   - [Level Editor](./LevelEditor.md)
   - [Sound](./sound.md)
+  - [StoryFlags](./Storyflags.md)
