@@ -16,5 +16,5 @@
 - MultiPlayer
 - [Sound API](./sound.md)
 - [Story Flags](./Storyflags.md)
-- Custom PlugIns
+- [Custom PlugIns](./plugins.md)
 - State Management and Peasy-UI
