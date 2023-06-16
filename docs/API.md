@@ -14,7 +14,7 @@
 - [Level Editor](./LevelEditor.md)
 - [Game Objects](./GameObject.md)
 - MultiPlayer
-- Sound API
+- [Sound API](./sound.md)
 - Story Flags
 - Custom PlugIns
 - State Management and Peasy-UI
