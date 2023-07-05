@@ -1,6 +1,7 @@
 - [Welcome to Squeleto](/)
 - [Getting started](./GettingStarted.md)
 - [Demo 1](./Demo1.md)
+- [Demo 2](./Demo2.md)
 
 - [API](/API.md)
   - [Viewport](./Viewport.md)
@@ -18,3 +19,6 @@
   - [Sound](./sound.md)
   - [StoryFlags](./Storyflags.md)
   - [Custom PlugIn](./plugins.md)
+  - [Aseprite Parser](./AsepriteParser.md)
+  - [Chiptune](./Chiptune.md)
+  - [Signals](./signals.md)

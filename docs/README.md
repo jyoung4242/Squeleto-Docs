@@ -1,5 +1,7 @@
 # Welcome to Squeleto
 
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/bukotsunikki.svg?style=social&label=Follow%20%40jyoung424242)](https://twitter.com/jyoung424242)
+
 > Squeleto is an simple 2d game framework built in Typescript and powered by Vite.
 
 Squeleto is a spin off of 'Skeleton' in spanish. 'El Squeleto' as a library is intended to provide a highlevel skeleton or abstraction for your game development needs.

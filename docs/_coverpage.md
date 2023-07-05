@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-# SQUELETO <small>0.1.2</small>
+# SQUELETO <small>0.3.0</small>
 
 > A 2D, game development framework library
 

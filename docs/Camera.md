@@ -8,8 +8,21 @@ It is helpful to assign a gameobject for the camera to follow so it knows where 
 
 ```ts
 //Set Camera
-this.renderer.cameraFollow("Player");
+static cameraFollow(
+    who: string,
+    lock?: {
+      lockX?: boolean;
+      lockY?: boolean;
+      lockXval?: number;
+      lockYval?: number;
+    }
+  )
 ```
+
+    updated info, Follow now has optional parameter of options, which allows for the follow method to lock in
+    the X or Y axis, so the camera will follow on one axis, but hold the lock value for others
+
+ca
 
 ## Flash
 
