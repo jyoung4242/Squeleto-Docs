@@ -29,7 +29,8 @@ Squeleto uses the peasy-lib framework to run many of the low level processes, in
 - Sprites
 - Spritesheet animations
 - Input Handling
-- Viewport and Camera
+- Viewport and Camera'
+  and much more!!!!
 
 ## CLI
 
