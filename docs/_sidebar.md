@@ -27,3 +27,5 @@
   - [Aseprite Parser](./AsepriteParser.md)
   - [Chiptune](./Chiptune.md)
   - [Signals](./signals.md)
+  - [ECS](./ECS.md)
+  - [Multiplayer](./multiplayer.md)
