@@ -160,7 +160,7 @@ The default server setup uses the Hathora/server-sdk.
 
 ### Package.json
 
-It is helpfule to make sure that package.json has an additional script added to it to handle running the server.
+It is helpful to make sure that package.json has an additional script added to it to handle running the server.
 
 ```json
 "scripts": {
