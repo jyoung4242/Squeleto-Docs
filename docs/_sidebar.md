@@ -1,7 +1,11 @@
 - [Welcome to Squeleto](/)
 - [Getting started](./GettingStarted.md)
+- [ECS](./ECS.md)
+
 - [Demo 1](./Demo1.md)
 - [Demo 2](./Demo2.md)
+- [Demo 3](./Demo3.md)
+
 - [Dev Roadmap](./roadmap.md)
 
 - [API](/API.md)

@@ -4,11 +4,19 @@
 
 > Squeleto is an simple 2d game framework built in Typescript and powered by Vite.
 
-Squeleto is a spin off of 'Skeleton' in spanish. 'El Squeleto' as a library is intended to provide a highlevel skeleton or abstraction for your game development needs.
+Squeleto is a spin off of 'Skeleton' in spanish. 'El Squeleto' as a library is intended to provide a highlevel skeleton or abstraction
+for your game development needs.
 
 ## Peasy
 
-Squeleto uses the peasy-lib framework to run many of the low level processes, including Asset management, UI binding, Input action binding, Game Loop, and in the future, will be a physics module and lighting module.
+Squeleto uses the peasy-lib framework to run many of the low level processes, including Asset management, UI binding, Input action
+binding, Game Loop, and in the future, will be a physics module and lighting module.
+
+## Basic and Advanced
+
+Squeleto has a very rudementary library with a simple gameloop and GameObjects. But the latest version of Squeleto introductes the
+Entity,Component, System (ECS) version of Squeleto. This is very exciting, while the ECS setup has less 'out-of-the-box' ready to go
+setup, it has the highest extensibility, as you can customize and tailer your enities however you want.
 
 [Link to Peasy GitHub](https://github.com/peasy-lib/peasy-lib/tree/main)
 
@@ -16,6 +24,7 @@ Squeleto uses the peasy-lib framework to run many of the low level processes, in
 
 > Squelto has library API's for:
 
+- ECS system now available
 - Game Objects
 - Scenes
 - Maps
@@ -29,8 +38,7 @@ Squeleto uses the peasy-lib framework to run many of the low level processes, in
 - Sprites
 - Spritesheet animations
 - Input Handling
-- Viewport and Camera'
-  and much more!!!!
+- Viewport and Camera' and much more!!!!
 
 ## CLI
 
