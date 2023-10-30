@@ -2,7 +2,8 @@
 
 ## Peasy-Assets
 
-It was decided to not create a layer of abstraction around peasy for this, and just to straight up use peasy-assets module to manage this.
+It was decided to not create a layer of abstraction around peasy for this, and just to straight up use peasy-assets module to manage
+this.
 
 [Link to Peasy-Assets GitHub](https://github.com/peasy-lib/peasy-lib/tree/main/packages/peasy-assets)
 
@@ -26,22 +27,10 @@ await Assets.load([
   "planter.png",
   "pizzazone.png",
 ]);
-
-//Load Maps
-this.renderer.createMap([new Kitchen(Assets), new OutsideMap(Assets)]);
-
-//Load Objects
-let objConfig = [
-  new Player(Assets, this.sm, this.dm),
-  new Counter(Assets, this.sm),
-  new Bookshelf(Assets, this.sm, this.dm),
-  new NPC1(Assets, this.sm, this.dm),
-  new Planter(Assets, this.sm),
-  new PizzaThingy(Assets, this.sm),
-];
 ```
 
-This is the core of the asset management, the intentions of peasy-Assets is to provide up front assets caching in the browser and making it easy to access those assets (sounds and images) when needed.
+This is the core of the asset management, the intentions of peasy-Assets is to provide up front assets caching in the browser and
+making it easy to access those assets (sounds and images) when needed.
 
 Pass the reference to the cached assets to Maps and GameObjects to exposed the cached content to them.
 
@@ -52,3 +41,13 @@ Pass the reference to the cached assets to Maps and GameObjects to exposed the c
 the src parameter sets the directory for where to load the assets from
 
 - `load([strings])`
+
+the load method takes an array of filenames(string) and will load/cache all the asset files
+
+- `image(string)`
+
+the image() method takes the truncated name of the image and provides access to the image element tied to that image
+
+- `audio(string)`
+
+the audio() method takes the truncated anme of the audio file and provides access to the audio element tied to that audio file

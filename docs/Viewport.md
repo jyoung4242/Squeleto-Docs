@@ -2,71 +2,91 @@
 
 ## Approach
 
-The Viewport is the highest level parent object in the DOM for your game.
-All other elements are children of the Viewport.
+Squeleto now uses peasy-viewport to manage Camera and Viewport functionality
 
-Teh Viewport specifically owns the SceneManager, and ultimately controls which scene is being displayed, and controls the 'transition' between the scenes.
-
-The primary task is setting up your viewport is to nail down the size and aspect ratio, which are passed in to the viewport in main.ts.
-
-    The CLI tool will boilerplate up an instance of your viewport, so in main.ts, if you want to adjust it, feel free too.
+[Link to Peasy-Viewport GitHub](https://github.com/peasy-lib/peasy-lib/tree/main/packages/peasy-viewport)
 
 ## Usage
 
+Once the viewport is created, you will add layers to it to be displayed.
+
 ```ts
-import { Viewport } from "../_Squeleto/Viewport";
+// IN MAIN.ts
+import { Viewport } from "@peasy-lib/peasy-viewport";
 
-/**************************************
- * Import and Configure Scenes
- **************************************/
-//import Scenes
-import { Login } from "./Scenes/login";
-import { Game } from "./Scenes/game";
-let scenes = [Login, Game];
-
-/**************************************
-//setup game state
-/**************************************/
-export const datamodel = new StateManagement();
-
-/**************************************
- * Import and configure game Viewport
- **************************************/
-const viewport = Viewport;
-viewport.initialize(datamodel, scenes, 400, "3.125/1.75");
-const template = `${viewport.template}`;
-viewport.setScene(0);
+// Setting up Viewport
+export const VIEWPORT_WIDTH = 400;
+const ASPECT_RATIO = 16 / 9;
+export const VIEWPORT_HEIGHT = VIEWPORT_WIDTH / ASPECT_RATIO;
+SceneManager.viewport = Viewport.create({ size: { x: VIEWPORT_WIDTH, y: VIEWPORT_HEIGHT } });
 ```
 
-    Author's note on media query breakpoints... right now their hardcoded for the below limits
-    Looking to abstract this away in the future so its configurable.
+```ts
+// in you're scene.ts
+// *************************************
+// Setup Viewport Layers
+// this uses the peasy-ui UI.create() method
+// *************************************
+
+SceneManager.viewport.addLayers([
+  {
+    name: "maplower",
+    parallax: 0,
+    image: Assets.image(Kitchen.lower).src,
+    size: { x: 192, y: 192 },
+    position: { x: 192 / 2, y: 192 / 2 },
+  },
+  { name: "game", parallax: 0, size: { x: 0, y: 0 } },
+  {
+    name: "mapupper",
+    parallax: 0,
+    image: Assets.image(Kitchen.upper).src,
+    size: { x: 192, y: 192 },
+    position: { x: 192 / 2, y: 192 / 2 },
+  },
+
+  {
+    name: "dialog",
+    size: { x: VIEWPORT_WIDTH, y: VIEWPORT_HEIGHT },
+  },
+]);
+let layers = SceneManager.viewport.layers;
+
+const game = layers.find(lyr => lyr.name == "game");
+if (game) this.view = UI.create(game.element as HTMLElement, this, this.template);
+if (this.view) await this.view.attached;
+
+const dialog = layers.find(lyr => lyr.name == "dialog");
+if (dialog) UI.create(dialog.element, new Dialogue(), Dialogue.template);
+```
+
+## Adding/Removing Layers
+
+You can manipulate the layers, for example, if you want to add a transition effect between map changes, you can add a 'transition'
+layer to hide the game layer.
+
+For changing maps, one approach is to remove the old map layer and insert a new map layer using `viewport.addLayer()`
+
+After all you're changes are complete, you can `viewport.removeLayer('layername')`
+
+## Changing Images and Size
+
+on each Layer object, there is an element property that gives you access to the DOM element for each layer the background image, width,
+and height in-line styles can be manipulated to change size and images.
+
+## Styling
+
+The viewport will have the 'viewport' class attached to the element, so you can reference this for styling purposes.
 
 ```css
-@media (max-width: 1100px) {
-  :root {
-    --pixel-size: 1.5;
-  }
-}
-
-@media (max-width: 675px) {
-  :root {
-    --pixel-size: 0.75;
-  }
+.viewport {
+  image-rendering: pixelated;
+  border: 1px whitesmoke solid;
+  border-radius: 3px;
+  background-color: #222222;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(var(--pixel-size));
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 ```
-
-## Methods
-
-### initialize
-
-`initialize(state:any, scenes:any, width?: number, aspectRatio?: string),`
-
-- state is the returned value from `new StateManagement()`
-
-### setScene
-
-`setScene(sceneIndex: number)`
-
-- the sceneIndex is the index number of the scene which is passed into the Viewport on startup
-
-this method is passed to each scene, so that native to each scene running there is a this.setScene() method to call that allows for easy switching from scene to scene

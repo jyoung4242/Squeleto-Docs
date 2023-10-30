@@ -4,41 +4,33 @@
 
 > Squeleto is an simple 2d game framework built in Typescript and powered by Vite.
 
-Squeleto is a spin off of 'Skeleton' in spanish. 'El Squeleto' as a library is intended to provide a highlevel skeleton or abstraction
-for your game development needs.
+Squeleto is a spin off of 'Skeleton' in spanish. 'El Squeleto' as a framework which is intended to provide a highlevel skeleton or
+abstraction for your game development needs.
 
 ## Peasy
 
 Squeleto uses the peasy-lib framework to run many of the low level processes, including Asset management, UI binding, Input action
 binding, Game Loop, and in the future, will be a physics module and lighting module.
 
-## Basic and Advanced
-
-Squeleto has a very rudementary library with a simple gameloop and GameObjects. But the latest version of Squeleto introductes the
-Entity,Component, System (ECS) version of Squeleto. This is very exciting, while the ECS setup has less 'out-of-the-box' ready to go
-setup, it has the highest extensibility, as you can customize and tailer your enities however you want.
-
 [Link to Peasy GitHub](https://github.com/peasy-lib/peasy-lib/tree/main)
 
-## Features
+## ECS Structure
 
-> Squelto has library API's for:
+Squeleto has a very rudementary Scene based structure. Squeleto utilizes an Entity,Component, System (ECS) structure. While other
+engines maybe be 'easier' to use, the ECS structure is highly extensibility, as you can customize and tailer your enities however you
+want.
 
-- ECS system now available
-- Game Objects
-- Scenes
-- Maps
-- Dialogue
-- Story Flags
-- Level editor
-- Events
-- Sounds
-- State Management
-- MultiPlayer (in development)
-- Sprites
-- Spritesheet animations
-- Input Handling
-- Viewport and Camera' and much more!!!!
+## Library of Systems and Components
+
+> In the Squeleto Repo, you will find example systems/components/Events for reuse
+
+- CLI tool to help get started
+- Scene Templates
+- Entity Templates
+- System Templates
+- Signals are pub/sub style information connections to link different parts of your code
+- Multi-player library, there is a pre-configured module to help link to Hathora, a multi-player framework
+- Vector module, assists with your typical vector style math, with helpful methods
 
 ## CLI
 
@@ -52,6 +44,6 @@ npx squeleto
 
 - Scaffold up blank project boilerplate
 - Download demo top down RPG tutorial
-- Download demo side-scrolling platformer
+- Link to Documentation
 
 [GETTING STARTED](/GettingStarted)

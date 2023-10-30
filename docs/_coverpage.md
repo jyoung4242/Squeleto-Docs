@@ -1,8 +1,8 @@
 <!-- _coverpage.md -->
 
-# SQUELETO <small>0.7.9</small>
+# SQUELETO <small>1.0.0</small>
 
-> A 2D, game development framework library
+> A 2D, game development ECS framework library
 
 - Simple and lightweight
 

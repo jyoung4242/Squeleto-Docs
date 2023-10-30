@@ -18,88 +18,83 @@ From you current working directory, open up a command line prompt.
 
 run `npx squeleto` in your prompt.
 
-To create a new ECS project, select that option, or you can use the Demo3 tutorial to get started.
+To create a new ECS project, select that option, or you can use the Demo tutorial to get started.
 
 ## Scenes
 
-Just like with Squeleto Basic, Squeleto-ECS runs off of scenes.
+Squeleto-ECS runs off of scenes.
 
 ```typescript
-import { SceneManager } from "../_SqueletoECS/Scene";
+import { SceneManager } from "../_Squeleto/Scene";
 
-//Scenes
-import { Lobby } from "./Scenes/lobby";
+/// Scenes
+import { Login } from "./Scenes/login";
 import { Game } from "./Scenes/game";
 
 //Load Scenes
 let sceneMgr = new SceneManager();
-sceneMgr.register(Lobby, Game);
-sceneMgr.set("lobby");
+sceneMgr.register(Login, Game);
+sceneMgr.set("Login");
 ```
 
-You will import the scenemanager and import your scenes Then you register your scenes with the scenemanager, and set the initial scene
+You will import the scenemanager and import your scenes. Then you register your scenes with the scenemanager, and set the initial scene
 
 ### Scene Template
 
 ```ts
 // Library
-import { Scene } from "../../_SqueletoECS/Scene";
-import { Vector } from "../../_SqueletoECS/Vector";
-import { Engine } from "@peasy-lib/peasy-engine";
-
-// Scene Systems
-/* *README*
-  You will import all your  ECS Systems here for this scene here
-  for example
-  import { MovementSystem } from "../Systems/Movement";
-  The camera is required, so we already included it for you
-  ... you're welcome ;)
-*/
-import { Camera, ICameraConfig } from "../../_SqueletoECS/Camera"; //this is in Squeleto library
-import { TemplateComp } from "../Components/templateComponent";
+import { Scene, SceneManager } from "../../_Squeleto/Scene";
+import { Vector } from "../../_Squeleto/Vector";
+import { Entity } from "../../_Squeleto/entity";
+import { System } from "../../_Squeleto/system";
+import { Signal } from "../../_Squeleto/Signals";
 
 // Entities
-import { TemplateEntity } from "../Entities/entityTemplate";
-/* *README*
-  You will import all your  ECS entities for this scene here
-  for example
-  import { MapEntity } from "../Entities/mapEntity";
-  import { DemoEntity } from "../Entities/demo";
-*/
+import { TemplateEntity } from "./Entities/Template.ts";
+
+// Systems
+import { TemplateSystem } from "./Systems/Template.ts";
+
 export class Test extends Scene {
   name: string = "test";
-  entities: any = [];
-  entitySystems: any = [];
-  sceneSystems: any = [];
+
+  entities: Entity[] = [];
+  Systems: System[] = [];
+
   public template = `
-    <scene-layer>
-        < \${ sceneSystem === } \${ sceneSystem <=* sceneSystems }
-    </scene-layer>
-  `;
-  public init = (): void => {
-    // add default entities to the array
+  <scene-layer class="scene" style="width: 100%; height: 100%; position: relative; top: 0; left:0; color: white;">
+    < \${ System === } \${ System <=* Systems }>
+  </scene-layer>`;
+
+  public async enter(previous: State | null, ...params: any[]): Promise<void> {
+    // Setups Assets Loading
+    Assets.initialize({ src: "../src/Assets/" });
+    await Assets.load(["test.png"]);
+
+    // Setup Viewport
+    SceneManager.viewport.addLayers([
+      {
+        name: "game",
+        parallax: 0,
+        image: Assets.image("test.png"),
+        size: { x: 100, y: 100 },
+        position: { x: 50, y: 50 },
+      },
+    ]);
+
+    const game = layers.find(lyr => lyr.name == "game");
+    if (game) this.view = UI.create(game.element as HTMLElement, this, this.template);
+    if (this.view) await this.view.attached;
+
+    // Load Entites
     this.entities.push(TemplateEntity.create());
 
-    //establish Scene Systems - Configuring Camera
-    let cConfig: ICameraConfig = {
-      name: "camera",
-      viewPortSystems: [],
-      gameEntities: this.entities,
-      position: new Vector(0, 0),
-      size: new Vector(400, 266.67),
-    };
-    let camera = Camera.create(cConfig);
-    console.log(camera);
-
-    //give the camera its systems to own
-    //camera.vpSystems.push(new KeyboardSystem(), new MovementSystem());
-
-    //Systems being added for Scene to own
-    this.sceneSystems.push(camera);
+    // Load Systems
+    this.Systems.push(new TemplateSystem());
 
     //Start GameLoop
-    //Engine.create({ fps: 60, started: true, callback: this.update });
-  };
+    Engine.create({ fps: 60, started: true, callback: this.update });
+  }
 
   //GameLoop update method
   update = (deltaTime: number): void | Promise<void> => {
@@ -110,9 +105,9 @@ export class Test extends Scene {
 }
 ```
 
-This is the template defined for new Scenes. The Scene class and name property should be changed. All systems (ECS and non-ECS systems)
-need to be imported and attached to the scene. All entities need to be imported into the scene and loaded. If you want a game loop,
-that's defined here and intialized. We've just commented it out in the template.
+This is the template defined for new Scenes. The Scene class and name property should be changed. All systems need to be imported and
+attached to the scene. All entities need to be imported into the scene and loaded. If you want a game loop, that's defined here and
+intialized.
 
 ## Entities
 
@@ -287,50 +282,6 @@ public define(data: ITemplateComponent): void {
 
 ## Systems
 
-There are two types of systems available in Squeleto ECS, non ECS systems (Camera primarily) and ECS systems(Movement, UI, Keyboard..)
-
-### Non-ECS systems
-
-These systems are owned and rendered by the scene, not the camera or viewport. The gameloop specifically calls the update() method of
-these scenes directly.
-
-These scenes need to be added when defined in the init method of the scene, and pushed into sceneSystems.
-
-```ts
-this.sceneSystems.push(camera);
-```
-
-#### non ECS system template
-
-The template for a non-ECS scene is much simpler. If there's a UI aspect of the there will be a template string literal.
-
-there needs to be a create method and an update method.
-
-When this gets pushed into the sceneSystems array, the template literal will be rendered to the DOM.
-
-You can use any peasy-UI binding you wish in this class.
-
-```ts
-export class myNonECSSystem {
-  myBoundValue: string = "I am a bound value";
-
-  public template = `
-    <div>\${myBoundValue}</div>
-    `;
-  constructor(params) {
-    //set up defaults
-  }
-
-  create(params) {
-    return new myNonECSSystem(params);
-  }
-
-  update(deltaTime: number) {
-    //do something here, called by Gameloop with deltatime param
-  }
-}
-```
-
 #### ECS system template
 
 ```ts
@@ -383,11 +334,4 @@ This is the template for systems provided with the blank project. Let's break it
 - `processEntity` this method is responsible for filtering out any entities which don't have the correct components attached to matter
   to this system
 
-- `update` this method is called by either the viewport or the camera, depending on who owns the system
-
-## Demo3
-
-When running the CLI, you can choose to download and setup the Demo3. The Demo3 is the demonstration of the ECS format, but also
-leverages the Multiplayer interface for Hathora.
-
-[Link](./Demo3.md) to Demo3 documentation
+- `update` this method is called by the peasy-engine handler that's configured in the Scene Template
