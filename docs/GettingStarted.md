@@ -32,7 +32,8 @@ the main game loop.
 
 ### Scenes
 
-Scenes in Squeleto are the fundamental unit of the library. The Scenes will do ALL of these things:
+Scenes in Squeleto are the fundamental unit of the library. The Scenes is where you would do all of these things: (not natively, you
+have to write this stuff...)
 
 - Setup game state
 - Create Maps and Levels

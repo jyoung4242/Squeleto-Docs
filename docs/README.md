@@ -16,9 +16,9 @@ binding, Game Loop, and in the future, will be a physics module and lighting mod
 
 ## ECS Structure
 
-Squeleto has a very rudementary Scene based structure. Squeleto utilizes an Entity,Component, System (ECS) structure. While other
-engines maybe be 'easier' to use, the ECS structure is highly extensibility, as you can customize and tailer your enities however you
-want.
+Squeleto has a very rudementary Scene based format and each scene encapsulates sections of the game. Within a scene, Squeleto utilizes
+an Entity,Component, System (ECS) structure. While other engines maybe be 'easier' to use, the ECS structure is highly extensibility,
+as you can customize and tailer your enities however you want.
 
 ## Library of Systems and Components
 
