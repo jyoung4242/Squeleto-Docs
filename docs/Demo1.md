@@ -24,7 +24,8 @@ game module fire 'signals' or custom events to any other module that's subscribe
 So, in this demo, the player can interact with the bookcase AND npc, which utilizes the interactions [System](./ECS?id=systems). You
 know when you can interact with an entity, as it glows white when the player is facing it (and press Space Bar), this is defined by the
 interactions [component](./ECS?id=components). When that occurs a Dialog modal pops up with corresponding messages tied to those
-interactions, which are defined on the [Entities](./ECS?id=entities).
+interactions, which are defined on the [Entities](./ECS?id=entities). Also, the bookcase also plays the 'charge' audio file from teh
+game event tied to those interactions.
 
 The player can walk around (arrow keys -> Keyboard System) and collide with objects and walls, thanks to the collision
 [System](./ECS?id=systems). When the player walks around, the map and camera track with the player due to the CameraFollow system.
@@ -34,6 +35,9 @@ kitchen in the bathroom, and 2.) in the bottom doorway of the kitchen. The bathr
 triggers a mapchange. When the player and NPC walk around, they are animated walking, thanks to the sprite animation system, and the
 NPC, when not being interacted with, will endlessly walk in a loop, thanks to the Events system and the defined behavior loop
 [component](./ECS?id=components) on the NPC entity.
+
+Both the NPC and the player have a passiveAudio component on them, to play the 'walking' sounds while they are moving. They are
+different sounds for each one. And if/when you change map, the npc's walking audio stops playing.
 
 The Entities in this demo are the player, NPC, bookcase, counter, planter, and pizzasign. Due to the Rendering system mentioned above,
 the player can walk around the objects and the y-sorting is handled properly.
@@ -66,6 +70,7 @@ Please refer to the demo source code for details on the components
 - Render
 - Sprite and Spritesheet
 - zindex
+- passiveAudio
 
 ### Systems in this demo
 
@@ -81,3 +86,4 @@ Please refer to the demo source code for details on the systems
 - StoryFlags
 - Chiptune
 - Animated Sprites
+- Passive Audio
